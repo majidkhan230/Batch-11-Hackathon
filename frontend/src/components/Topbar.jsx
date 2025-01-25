@@ -25,35 +25,32 @@ import { SidebarTrigger } from "./ui/sidebar";
 
 function Topbar() {
   const user = useSelector((state) => state.user);
-// console.log(user)
-  const dispatch  = useDispatch()
-  const navigate = useNavigate()
+  // console.log(user)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const res = await getReq('/auth/logout')
+      const res = await getReq("/auth/logout");
 
-      showToast("sucess",res?.messsage)
-      dispatch(removeUser())
-      if(res){
-        navigate("/sign-in")
+      showToast("sucess", res?.messsage);
+      dispatch(removeUser());
+      if (res) {
+        navigate("/sign-in");
       }
-      
     } catch (error) {
       console.log(error.message);
     }
-    
-  }
-  
+  };
 
   return (
     <div className="w-full h-16 border-b bg-white fixed z-20 flex justify-between items-center px-10 ">
       <SidebarTrigger className=" md:hidden  mr-5  absolute top-5 left-2" />
-        <Link to={'/'}>
-          <h1 className="text-xl font-semibold uppercase tracking-tighter font-serif">
+      <Link to={"/"}>
+        <h1 className="text-xl font-semibold uppercase tracking-tighter font-serif">
           logo here
-          </h1>
-        </Link>
+        </h1>
+      </Link>
       <div>
         <SearchBox />
       </div>
@@ -68,10 +65,16 @@ function Topbar() {
         ) : (
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Avatar className='border border-blue-700'>
-                <AvatarImage src={user?.user?.avatar || dummyAvatar} />
-                <AvatarFallback>
-                </AvatarFallback>
+              <Avatar
+                className="border-2 border-blue-600 ring-2 ring-blue-300 ring-offset-2 
+             transition-all duration-300 hover:ring-4 hover:border-blue-800 
+             hover:scale-105 group"
+              >
+                <AvatarImage
+                  src={user?.user?.avatar || dummyAvatar}
+                  className="group-hover:brightness-110"
+                />
+                <AvatarFallback></AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -81,20 +84,16 @@ function Topbar() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link to={'/profile'}>
+                <Link to={"/dashboard/profile"}>
                   <FaRegUser /> Profile
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link to={'blog/add'}>
-                  <GrAdd /> Create Blog
-                </Link>
-              </DropdownMenuItem>
+
               <DropdownMenuSeparator />
 
               <DropdownMenuItem onClick={handleLogout}>
-                  <MdLogout />
-                  Logout
+                <MdLogout />
+                Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

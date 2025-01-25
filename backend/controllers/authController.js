@@ -4,6 +4,7 @@ import userModel from "../models/user.model.js";
 import bcrypt from "bcrypt";
 
 const register = async (req, res, next) => {
+  const file = req.file
   try {
     const user = await userModel.findOne({ email: req.body.email });
 
@@ -19,6 +20,13 @@ const register = async (req, res, next) => {
       email: req.body.email,
       password: hashPassword,
     });
+
+if(file){
+  newUser.avatar = req.file.path
+}
+
+newUser.save()
+
 
     res.status(201).send({
       success: true,
@@ -67,6 +75,50 @@ const login = async (req, res, next) => {
   }
 };
 
+export const GoogleLogin = async (req, res, next) => {
+  console.log("hitted")
+  try {
+      const { name, email, avatar } = req.body
+      console.log(name,email,avatar)
+      let user = await userModel.findOne({ email })
+      if (!user) {
+          //  create new user 
+          const password = Math.random().toString()
+          const hashPassword = await bcrypt.hash(password, 10);
+          const newUser = new userModel({
+              name, email, password: hashPassword, avatar
+          })
+
+          user = await newUser.save()
+
+      }
+
+
+      const token = generateToken({
+          email: user.email,
+  })
+
+
+      res.cookie('access_token', token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+          path: '/'
+      })
+
+      const newUser = user.toObject({ getters: true })
+      delete newUser.password
+      res.status(200).json({
+          success: true,
+          user: newUser,
+          message: 'Login successfuly.'
+      })
+
+  } catch (error) {
+      next(errorHandler(500, error.message))
+  }
+}
+
 const logout = async (req, res, next) => {
   try {
 
@@ -90,6 +142,6 @@ const logout = async (req, res, next) => {
     next(errorHandler(error));
   }
 };
-const authController = { register,login,logout };
+const authController = { register,login,logout,GoogleLogin };
 
 export default authController;

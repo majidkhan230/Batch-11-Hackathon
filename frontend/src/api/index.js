@@ -19,14 +19,14 @@ export const postReq =async (url,data,options={}) =>{
         return req
     } catch (error) {
         console.log(error.response?.data?.message)
-        showToast('error', error.response.data.message ||error.message)
+        showToast('error', error?.response?.data.message ||error.message)
 
     }
 }
 export const updReq = async(url,data,options={}) =>{
     try {
         const req = await apiClient.put(url,data,options)
-        showToast("sucess",req.data.message)
+        showToast("sucess",req?.data?.message)
         return req
     } catch (error) {
         console.log(error.message)

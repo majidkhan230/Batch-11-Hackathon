@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "./components/ui/button";
 import { Route, Routes } from "react-router-dom";
-import Layout from "./layout/Layout";
+import Layout from "./pages/Dashboard/Layout";
 import { routes } from "./routes/routes";
 
 const renderRoutes = (routes) =>

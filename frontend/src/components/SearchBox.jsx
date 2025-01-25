@@ -13,13 +13,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { useNavigate } from 'react-router-dom'
 const formSchema = z.object({
   search: z.string()
 })
 
 function SearchBox() {
-const  navigate = useNavigate() 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,7 +30,7 @@ const  navigate = useNavigate()
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values.search)
-    navigate(RouteSearch(values.search))
+  
   }
 
   

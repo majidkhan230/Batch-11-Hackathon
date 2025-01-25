@@ -24,24 +24,25 @@ import { Link, useNavigate } from "react-router-dom";
 import { postReq } from "@/api";
 
 function SignUp() {
+  const navigate = useNavigate();
 
-  const navigate =useNavigate()
-  
   const formSchema = z
-  .object({
-    username: z.string().min(3, "Name must be 3 characters long").max(50),
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(8, "Password must be at least 8 characters long"),
-    confirmPassword: z.string(),
-  })
-  .superRefine((values, ctx) => {
-    if (values.password !== values.confirmPassword) {
-      ctx.addIssue({
-        path: ["confirmPassword"],
-        message: "Passwords do not match",
-      });
-    }
-  });
+    .object({
+      username: z.string().min(3, "Name must be 3 characters long").max(50),
+      email: z.string().email("Invalid email address"),
+      password: z
+        .string()
+        .min(8, "Password must be at least 8 characters long"),
+      confirmPassword: z.string(),
+    })
+    .superRefine((values, ctx) => {
+      if (values.password !== values.confirmPassword) {
+        ctx.addIssue({
+          path: ["confirmPassword"],
+          message: "Passwords do not match",
+        });
+      }
+    });
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -53,24 +54,29 @@ function SignUp() {
     },
   });
 
-async  function onSubmit(values) {
-    const {username, email, password, confirmPassword} = values
+  async function onSubmit(values) {
+    const { username, email, password, confirmPassword } = values;
 
-  const res =  await  postReq('/auth/register', {
-    name: username,
-    email,
-    password
-  })
-  console.log(res)
-  if(res){
-    navigate('/sign-in')
-  }
+    const res = await postReq("/auth/register", {
+      name: username,
+      email,
+      password,
+    });
+    console.log(res);
+    if (res) {
+      navigate("/sign-in");
+    }
   }
 
   return (
-    <div className="w-full h-screen  flex justify-center items-center ">
+    <div className="w-full h-screen  flex justify-center items-center bg-gray-100 ">
       <Card className="w-[410px]">
         <CardHeader>
+          <Link to={"/"} className="text-center">
+            <h1 className="text-xl font-semibold uppercase tracking-tighter font-serif mb-4">
+              Your Logo
+            </h1>
+          </Link>
           <CardTitle className="text-2xl text-center">Sign Up</CardTitle>
           <CardDescription className="text-center">
             Please Enter your username,email and password{" "}
@@ -79,7 +85,7 @@ async  function onSubmit(values) {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div >
+              <div>
                 <FormField
                   control={form.control}
                   name="username"
@@ -97,7 +103,7 @@ async  function onSubmit(values) {
                   )}
                 />
               </div>
-              <div >
+              <div>
                 <FormField
                   control={form.control}
                   name="email"
@@ -112,7 +118,7 @@ async  function onSubmit(values) {
                   )}
                 />
               </div>
-              <div >
+              <div>
                 <FormField
                   control={form.control}
                   name="password"
@@ -130,7 +136,7 @@ async  function onSubmit(values) {
                   )}
                 />
               </div>
-              <div >
+              <div>
                 <FormField
                   control={form.control}
                   name="confirmPassword"
@@ -151,7 +157,13 @@ async  function onSubmit(values) {
               <div className="text-center">
                 <Button type="submit">Sign up</Button>
                 <div className="mt-2">
-                  Already have an account? <Link to={"/sign-in"} className="text-blue-500 hover:underline">Sign in</Link>
+                  Already have an account?{" "}
+                  <Link
+                    to={"/sign-in"}
+                    className="text-blue-500 hover:underline"
+                  >
+                    Sign in
+                  </Link>
                 </div>
               </div>
             </form>
