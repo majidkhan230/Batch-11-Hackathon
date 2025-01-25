@@ -51,7 +51,7 @@ function Topbar() {
       <SidebarTrigger className=" md:hidden  mr-5  absolute top-5 left-2" />
         <Link to={'/'}>
           <h1 className="text-xl font-semibold uppercase tracking-tighter font-serif">
-            <span className="text-3xl text-red-600">B</span>log
+          logo here
           </h1>
         </Link>
       <div>
