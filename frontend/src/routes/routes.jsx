@@ -13,7 +13,7 @@ const generateLoanCategoryRoutes = () => {
       path: category.route,
       children: category.subcategories.map(subcategory => ({
         path: subcategory.route.split('/').pop(),
-        element: <CategoriesForm categories={categories} />
+        element: <CategoriesForm categories={category} />
       }))
     }));
   };

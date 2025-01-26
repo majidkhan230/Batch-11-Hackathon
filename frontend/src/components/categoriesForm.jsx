@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import { Dialog, DialogTrigger } from "./ui/dialog";
 import DialogDemo from "./Dialog";
 
-const CategoriesForm = () => {
+const CategoriesForm = ({category}) => {
  const categories = [
   {wedding:["Valima","Furniture",'Valima Food',"Jahez"]},
   {construction:["Valima","Furniture",'Valima Food',"Jahez"]},
