@@ -18,31 +18,13 @@ import { LuUsers } from "react-icons/lu";
 function AppSidebar() {
 
   const sideBarItems = [
-    {
-      label: "Dashboard",
-      route: "/",
-      icon: IoHomeOutline,
-    },
+  
     {
       label: "Categories",
       route: "/category",
       icon: BiCategoryAlt,
     },
-    {
-      label: "Blogs",
-      route: "/blog/",
-      icon: GrBlog,
-    },
-    {
-      label: "Comments",
-      route: "/get-comments",
-      icon: FaRegComments,
-    },
-    {
-      label: "Users",
-      route: "/get-users",
-      icon: LuUsers,
-    },
+    
   ]
   
   return (

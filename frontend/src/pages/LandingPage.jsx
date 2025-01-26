@@ -6,17 +6,17 @@ function LandingPage() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground">
       <div className="text-center space-y-6">
         <h1 className="text-4xl font-bold tracking-tight">
-          Welcome to Your Application
+          Welcome to Saylani Microfinance App
         </h1>
         <p className="text-xl text-muted-foreground max-w-md mx-auto">
-          Discover amazing features and start your journey with us.
+        The bank provides tailored financial solutions to support individuals in various life stages and entrepreneurial pursuits, offering flexible loan options with structured repayment plans.
         </p>
         <div className="flex justify-center space-x-4">
-          <Link to="/sign-in">
-            <Button>Sign In</Button>
+          <Link to={'/categories'}>
+              <Button> categories</Button>
+              
           </Link>
-          <Button variant="outline">Learn More</Button>
-        </div>
+        </div>  
       </div>
     </div>
   )

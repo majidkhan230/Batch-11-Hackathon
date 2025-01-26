@@ -22,6 +22,7 @@ import { getReq } from "@/api";
 import { showToast } from "@/helpers/showToast";
 import { removeUser } from "@/store/features/userSlice";
 import { SidebarTrigger } from "./ui/sidebar";
+import logo from '/assets/images/logo.png'
 
 function Topbar() {
   const user = useSelector((state) => state.user);
@@ -48,7 +49,7 @@ function Topbar() {
       <SidebarTrigger className=" md:hidden  mr-5  absolute top-5 left-2" />
       <Link to={"/"}>
         <h1 className="text-xl font-semibold uppercase tracking-tighter font-serif">
-          logo here
+          <img src={logo} alt="logo" width={100} />
         </h1>
       </Link>
       <div>

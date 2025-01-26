@@ -19,7 +19,9 @@ const userSchema = new mongoose.Schema({
         unique: true,
         trim: true
     },
-   
+    CNIC:{
+        type:String,
+    },
     avatar: {
         type: String,
         trim: true
