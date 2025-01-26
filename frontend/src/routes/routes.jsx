@@ -1,4 +1,4 @@
-import CategoriesForm from "@/components/CategoriesForm";
+import CategoriesForm from "@/components/categoriesForm";
 import { loanCategories } from "@/helpers/routeHelper";
 import Categories from "@/pages/Categories";
 import Layout from "@/pages/Dashboard/Layout";

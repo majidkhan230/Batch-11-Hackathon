@@ -7,7 +7,6 @@ import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
 const register = async (req, res,next) => {
   try {
-    const URI =  process.env.FRONTEND_URI
     console.log(req.body)
     const user = await userModel.findOne({ email: req.body.email });
     
@@ -17,6 +16,7 @@ const register = async (req, res,next) => {
       return next(errorHandler(409, "User already exists"));
     }
 
+    // const hashPassword = await bcrypt.hash(req.body.password, 10);
     
 
 
@@ -64,7 +64,12 @@ const register = async (req, res,next) => {
         <div class="container">
           <h2>Password Reset Request</h2>
           <p>You have requested to generate  your password. Click the button below to proceed:</p>
-         
+          <a 
+  href={``} 
+  className="button"
+>
+  Generate Password
+</a>
           <p style="font-size: 0.8em; color: #666;">
             This link will expire in 1 hour for your security.
           </p>
