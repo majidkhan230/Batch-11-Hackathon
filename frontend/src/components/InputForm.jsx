@@ -59,7 +59,7 @@ export function InputForm() {
                 <FormItem>
                   <FormLabel>CNIC</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="enter you CNIC" {...field} />
                   </FormControl>
             
                   <FormMessage />
@@ -75,7 +75,7 @@ export function InputForm() {
                 <FormItem>
                   <FormLabel>EMAIl</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="enter your email" {...field} />
                   </FormControl>
             
                   <FormMessage />
@@ -91,7 +91,7 @@ export function InputForm() {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="enter your name" {...field} />
                   </FormControl>
             
                   <FormMessage />

@@ -26,58 +26,64 @@ const register = async (req, res,next) => {
       CNIC:req.body.CNIC
     });
 
-    const token = await jwt.sign({email:req.body.email},process.env.SECRET_KEY)
+    const token = crypto.randomBytes(20).toString("hex");
+    console.log(token);
+
+    user.resetPasswordToken = token;
+    
+    await resetMail(req.body.email,`https://batch-11-hackathon-ed87.vercel.app/reset/${token}`);
+    res.status(200).send("email send successfully");
 
     // resetMail(req.body.email, 'dfla;dkf')
-    const info = await transporter.sendMail({
-      from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
-      to: "bar@example.com, baz@example.com", // list of receivers
-      subject: "Hello ✔", // Subject line
-      text: "Hello world?", // plain text body
-      html: `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <title>Password Reset</title>
-        <style>
-          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-          .container { 
-            max-width: 600px; 
-            margin: 0 auto; 
-            padding: 20px; 
-            background-color: #f4f4f4; 
-            border-radius: 5px; 
-          }
-          .button {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 15px;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <h2>Password Reset Request</h2>
-          <p>You have requested to generate  your password. Click the button below to proceed:</p>
-          <a 
-  href={``} 
-  className="button"
->
-  Generate Password
-</a>
-          <p style="font-size: 0.8em; color: #666;">
-            This link will expire in 1 hour for your security.
-          </p>
-        </div>
-      </body>
-      </html>
-    ` // html body
-    });
+//     const info = await transporter.sendMail({
+//       from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
+//       to: "bar@example.com, baz@example.com", // list of receivers
+//       subject: "Hello ✔", // Subject line
+//       text: "Hello world?", // plain text body
+//       html: `
+//       <!DOCTYPE html>
+//       <html lang="en">
+//       <head>
+//         <meta charset="UTF-8">
+//         <title>Password Reset</title>
+//         <style>
+//           body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+//           .container { 
+//             max-width: 600px; 
+//             margin: 0 auto; 
+//             padding: 20px; 
+//             background-color: #f4f4f4; 
+//             border-radius: 5px; 
+//           }
+//           .button {
+//             display: inline-block;
+//             background-color: #007bff;
+//             color: white;
+//             padding: 10px 20px;
+//             text-decoration: none;
+//             border-radius: 5px;
+//             margin-top: 15px;
+//           }
+//         </style>
+//       </head>
+//       <body>
+//         <div class="container">
+//           <h2>Password Reset Request</h2>
+//           <p>You have requested to generate  your password. Click the button below to proceed:</p>
+//           <a 
+//   href={``} 
+//   className="button"
+// >
+//   Generate Password
+// </a>
+//           <p style="font-size: 0.8em; color: #666;">
+//             This link will expire in 1 hour for your security.
+//           </p>
+//         </div>
+//       </body>
+//       </html>
+//     ` // html body
+//     });
 
     res.send({
       message:"message sent successfully"
@@ -231,7 +237,7 @@ const forgotPassword = async (req, res) => {
     user.resetPasswordToken = token;
 
     await user.save();
-    await resetMail(email,`http://localhost:5173/reset/${token}`);
+    await resetMail(email,`https://batch-11-hackathon-ed87.vercel.app/reset/${token}`);
     res.status(200).send("email send successfully");
 
 

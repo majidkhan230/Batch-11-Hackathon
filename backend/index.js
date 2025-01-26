@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import authRoutes from './routes/auth.js'
+import loanRoutes from './routes/loanRoutes.js'
 const app = express()
 dotenv.config()
 
@@ -23,7 +24,7 @@ app.get("/", (req, res) => {
 
 
 app.use('/api/auth',authRoutes)
-
+app.use('/api/loans', loanRoutes);
 
 app.use((err,req,res,next)=>{
   const statusCode = err.statusCode || 500

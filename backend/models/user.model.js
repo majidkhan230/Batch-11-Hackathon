@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
         select:false,
         trim: true
     },
+    resetPasswordToken:{
+        type: String,
+    }
 },{timestamps:true})
 
 const userModel = mongoose.model('User', userSchema,)
